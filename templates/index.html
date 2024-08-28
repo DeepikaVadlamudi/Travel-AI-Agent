@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Duration Agent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Travel Duration Agent</h1>
+        <form id="query-form" action="/" method="post">
+            <input type="text" id="query-input" name="query" placeholder="Enter your query here..." required>
+            <input type="hidden" name="channel" value="web">
+            <div>
+                <label for="language">Choose Language:</label>
+                <select id="language" name="language">
+                    <option value="en-US">English (US)</option>
+                    <option value="en-GB">English (UK)</option>
+                    <option value="es-ES">Spanish</option>
+                    <option value="fr-FR">French</option>
+                    <option value="de-DE">German</option>
+                    <!-- Add more languages as needed -->
+                </select>
+            </div>
+            <button type="submit">Get Duration</button>
+            <button type="button" id="speak-button">Speak</button>
+        </form>
+        {% if response %}
+        <p>{{ response }}</p>
+        {% endif %}
+        <h2>Search History</h2>
+        <div class="history-buttons">
+            {% for origin, destination, mode, duration in history %}
+            <button type="button" class="history-item" data-query="{{ origin }} to {{ destination }} by {{ mode }}">
+                {{ origin }} to {{ destination }} - {{ duration }}
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.interimResults = false;
+        
+        // Language support
+        document.getElementById('language').addEventListener('change', function() {
+            recognition.lang = this.value;
+        });
+
+        document.getElementById('speak-button').addEventListener('click', function() {
+            recognition.lang = document.getElementById('language').value;
+            recognition.start();
+        });
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById('query-input').value = transcript;
+
+            // Voice confirmation using text-to-speech
+            const speech = new SpeechSynthesisUtterance();
+            speech.lang = recognition.lang;
+            speech.text = "You said: " + transcript ;
+            speechSynthesis.speak(speech);
+
+            // Automatically submit the form after speaking
+            speech.onend = function() {
+                document.getElementById('query-form').submit();
+            };
+        };
+
+        recognition.onerror = function(event) {
+            let errorMessage = '';
+            switch(event.error) {
+                case 'no-speech':
+                    errorMessage = 'No speech detected. Please try again.';
+                    break;
+                case 'audio-capture':
+                    errorMessage = 'Microphone is not accessible. Please check your settings.';
+                    break;
+                case 'not-allowed':
+                    errorMessage = 'Permission to use microphone was denied. Please allow access and try again.';
+                    break;
+                default:
+                    errorMessage = 'An error occurred: ' + event.error;
+            }
+            alert(errorMessage);
+        };
+
+        // Handle shortcut buttons for search history
+        document.querySelectorAll('.history-item').forEach(button => {
+            button.addEventListener('click', function() {
+                document.getElementById('query-input').value = this.getAttribute('data-query');
+                document.getElementById('query-form').submit();
+            });
+        });
+    </script>
+</body>
+</html>
