@@ -1,0 +1,13 @@
+Flask
+requests
+openai
+googlemaps
+langchain
+flask-login
+python-dotenv
+SpeechRecognition
+pyttsx3
+pyaudio
+pyobjc
+gtts
+playsound==1.2.2
