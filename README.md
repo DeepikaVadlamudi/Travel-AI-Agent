@@ -1,5 +1,6 @@
 # Travel-AI-Agent
-A travel agent that answer questions about current travel duration between two locations for a mode of transport of the user’s choosing. It is a Flask-based web application that integrates voice recognition, OpenAI's GPT-4, Weather APIs and Google APIs
+
+A travel agent that answers questions about the current travel duration between two locations for a mode of transport of the user’s choosing. It is a Flask-based web application that integrates voice recognition, OpenAI's GPT-4, Weather APIs, and Google APIs.
 
 ## Features
 - Voice recognition for user input
@@ -23,9 +24,9 @@ A travel agent that answer questions about current travel duration between two l
 
 1. Clone the repository:
     ```bash
-git clone https://github.com/DeepikaVadlamudi/Travel-AI-Agent.git
-```
-    
+    git clone https://github.com/DeepikaVadlamudi/Travel-AI-Agent.git
+    ```
+
 2. Install the required packages:
     ```bash
     pip install -r requirements.txt
@@ -40,9 +41,13 @@ git clone https://github.com/DeepikaVadlamudi/Travel-AI-Agent.git
       ```
 
 ## Running the Application
-``` python views.py```
 
-3. Access the application via `http://127.0.0.1:5000/`.
+1. Run the app:
+    ```bash
+    python views.py
+    ```
+
+2. Access the application via `http://127.0.0.1:5000/`.
 
 ## Usage
 
@@ -50,5 +55,3 @@ git clone https://github.com/DeepikaVadlamudi/Travel-AI-Agent.git
 - Click "Get Directions" to get responses.
 - Use the "Speak" button to provide voice commands.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
