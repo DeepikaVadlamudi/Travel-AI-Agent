@@ -26,13 +26,22 @@ A travel agent that answers questions about the current travel duration between 
     ```bash
     git clone https://github.com/DeepikaVadlamudi/Travel-AI-Agent.git
     ```
+2. Create and activate virtual environment by running the following commands: (using Mac)
+   
 
-2. Install the required packages:
+   ``` bash
+   python3 -m venv venv
+   ```
+
+   ```bash
+   source venv/bin/activate
+   ```
+
+3. Install the required packages:
     ```bash
     pip install -r requirements.txt
     ```
-
-3. Set up your environment variables:
+4. Set up your environment variables:
     - Create a `.env` file in the root directory with the following content:
       ```
       OPENAI_API_KEY=your_openai_api_key
