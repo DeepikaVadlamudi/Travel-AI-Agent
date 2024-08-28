@@ -23,7 +23,7 @@ A travel agent that answer questions about current travel duration between two l
 
 1. Clone the repository:
     ```bash
-git clone [https://github.com/DeepikaVadlamudi/Travel-AI-Agent](https://github.com/DeepikaVadlamudi/Travel-AI-Agent.git)
+git clone https://github.com/DeepikaVadlamudi/Travel-AI-Agent.git
 ```
     
 2. Install the required packages:
